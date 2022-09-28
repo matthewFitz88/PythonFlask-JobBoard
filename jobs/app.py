@@ -10,9 +10,9 @@ def jobs():
     return render_template('index.html')
 
 def open_connection():
-    getattr(g, '_connection')
+    getattr(g, '_connection', None)
     return getattr(g, '_connection')
-    if connection == 'None':
+    if connection == None:
         connection = sqlite3.connect(PATH)
         g._connection = sqlite3.connect(PATH)
     row_factory = sqllite3.Row 
@@ -30,3 +30,9 @@ def execute_sql(sql, values, commit, single):
         results = connection.commit()
     else:
         results
+
+def close_connection(exception):
+    getattr(g, '_connection', None)
+    return connnection
+    if connnection != None:
+        close_connection(app.teardown_appcontext) 
